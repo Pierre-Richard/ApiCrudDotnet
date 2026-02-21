@@ -9,6 +9,8 @@ public class UserService : IUserService
     public User CreateUser(User user)
     {
         // Ajouter un user à la liste
+        var userCount = users.Count();
+        user.Id = userCount +1;
         users.Add(user);
         // retourner le user
         return user;

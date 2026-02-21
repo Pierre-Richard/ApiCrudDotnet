@@ -31,3 +31,4 @@
 /Users/mayer/Documents/Workspace/Personal_Projets/dotnet/ApiCrudDotnet/CrudWebApi/obj/Debug/net10.0/CrudWebApi.pdb
 /Users/mayer/Documents/Workspace/Personal_Projets/dotnet/ApiCrudDotnet/CrudWebApi/obj/Debug/net10.0/CrudWebApi.genruntimeconfig.cache
 /Users/mayer/Documents/Workspace/Personal_Projets/dotnet/ApiCrudDotnet/CrudWebApi/obj/Debug/net10.0/ref/CrudWebApi.dll
+/Users/mayer/Documents/Workspace/Personal_Projets/dotnet/ApiCrudDotnet/CrudWebApi/obj/Debug/net10.0/CrudWebApi.sourcelink.json

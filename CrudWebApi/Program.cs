@@ -32,6 +32,10 @@ builder.Services.AddScoped<IUserService, UserService>();
 // j'utilise la méthode AddScoped
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
+builder.Services.AddScoped<IAuthService, AuthService>();
+
+
+
 // // Renvoie du camelCase en JSON au front
 builder.Services.AddControllers()
     .AddJsonOptions(options =>

@@ -1,11 +1,13 @@
 using System;
 using CrudWebApi.Models;
 using CrudWebApi.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
 namespace CrudWebApi.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController: ControllerBase

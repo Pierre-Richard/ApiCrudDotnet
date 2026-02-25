@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CrudWebApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3a5cdde565a2141c57d23d9b58bd2172ab90f478")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+71dc533fd5e5a43d675a00aa5b55b9b97311c88c")]
 [assembly: System.Reflection.AssemblyProductAttribute("CrudWebApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CrudWebApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

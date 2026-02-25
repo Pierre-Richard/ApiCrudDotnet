@@ -24,7 +24,7 @@ namespace CrudWebApi.Controllers
         public ActionResult<string> Register([FromBody] User user) => Ok(_authService.Register(user));
 
         //Get
-         [HttpGet("login")]
+         [HttpPost("login")]
            public ActionResult<string> Login([FromBody] User user) => Ok(_authService.Login(user));
 
     }

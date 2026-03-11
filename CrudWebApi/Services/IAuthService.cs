@@ -1,11 +1,13 @@
 using System;
-using CrudWebApi.Models;
+using CrudWebApi.DTOs;
+
 
 namespace CrudWebApi.Services
 {
     public interface IAuthService
     {
-        string Register(User user);
-        string Login(User user);
+        AuthResponseDto Register(RegisterDto user);
+        AuthResponseDto Login(LoginDto user);
     }
 }
+        

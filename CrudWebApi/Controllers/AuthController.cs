@@ -1,4 +1,5 @@
 using System;
+using CrudWebApi.DTOs;
 using CrudWebApi.Models;
 using CrudWebApi.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -21,11 +22,11 @@ namespace CrudWebApi.Controllers
 
         // post
         [HttpPost("register")]
-        public ActionResult<string> Register([FromBody] User user) => Ok(_authService.Register(user));
+        public ActionResult<AuthResponseDto> Register([FromBody] RegisterDto user) => Ok(_authService.Register(user));
 
         //Get
          [HttpPost("login")]
-           public ActionResult<string> Login([FromBody] User user) => Ok(_authService.Login(user));
+        public ActionResult<AuthResponseDto> Login([FromBody] LoginDto user) => Ok(_authService.Login(user));
 
     }
     

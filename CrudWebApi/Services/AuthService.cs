@@ -4,8 +4,10 @@ using System.Linq.Expressions;
 using System.Security.Claims;
 using System.Text;
 using CrudWebApi.Data;
+using CrudWebApi.DTOs;
 using CrudWebApi.Models;
 using Microsoft.IdentityModel.Tokens;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure.Internal;
 
 namespace CrudWebApi.Services
 {
@@ -21,7 +23,7 @@ namespace CrudWebApi.Services
             _configuration = configuration;
         }
 
-        private string GenerateToken(User user)
+        private string GenerateToken(AuthResponseDto user)
         {
               //Générer un token JWT
             // Les infos qu'on met dans le token
@@ -45,23 +47,44 @@ namespace CrudWebApi.Services
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        public string Register(User user)
+        public AuthResponseDto Register(RegisterDto user)
         {
-
-            //Recevoir firstName, lastName, email, password
-            //Hacher le password avec BCrypt
+              //Hacher le password avec BCrypt
             var hashPassword = BCrypt.Net.BCrypt.HashPassword(user.Password, 13);
             user.Password = hashPassword;
+            // créer un objet User à partir de registerDTO
+            var newUser = new User()
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                Password = user.Password,
+
+            };       
+          
             //ajouter le mot de passe
-            _appDbContext.Add(user);
+            _appDbContext.Add(newUser);
             // sauvegarder le user
             _appDbContext.SaveChanges();
 
-            return GenerateToken(user);
+            //Crée authResponseDto avec les infos du user sans le token
+            var authResponseDto = new AuthResponseDto()
+            {   Id = newUser.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+            };
+
+            //Génère le token en passant authResponseDto
+            var generateToken = GenerateToken(authResponseDto);
+            // Assigne le token à authResponseDto.Token
+            authResponseDto.Token = generateToken;
+          
+            return authResponseDto;
           
         }
 
-        public string Login(User user)
+        public AuthResponseDto Login(LoginDto user)
         {
             //je regarde dans la db si utilisateur existe via son email
             var userdb = _appDbContext.Users.FirstOrDefault((u) => u.Email == user.Email);
@@ -71,7 +94,22 @@ namespace CrudWebApi.Services
                 //si le password existe 
                 if (verifyPassword)
                 {
-                    return GenerateToken(user);
+                    //Crée authResponseDto avec les infos du user sans le token
+                    var authResponseDto = new AuthResponseDto()
+                    {
+                        Id = userdb.Id,
+                        FirstName = userdb.FirstName,
+                        LastName = userdb.LastName,
+                        Email = userdb.Email,
+                    };
+
+                    //Génère le token en passant authResponseDto
+                    var generateToken = GenerateToken(authResponseDto);
+
+                    authResponseDto.Token = generateToken;
+
+                    return authResponseDto;
+
 
                 }
                 else
@@ -88,7 +126,6 @@ namespace CrudWebApi.Services
 
 
         }
-
     }
 
 
